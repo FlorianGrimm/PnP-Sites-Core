@@ -152,6 +152,10 @@
           <SpecificVersion>False</SpecificVersion>
           <HintPath>..\..\Assemblies\16.1\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
         </Reference>
+        <Reference Include="Microsoft.ProjectServer.Client, Version=16.1.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\..\Assemblies\16.1\Microsoft.ProjectServer.Client.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </When>
     <When Condition=" '$(Configuration)' == 'debug16' Or '$(Configuration)' == 'release16' ">
@@ -214,6 +218,10 @@
           <SpecificVersion>False</SpecificVersion>
           <HintPath>..\..\Assemblies\16.0\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
         </Reference>
+        <Reference Include="Microsoft.ProjectServer.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\..\Assemblies\16.0\Microsoft.ProjectServer.Client.dll</HintPath>
+        </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
@@ -265,6 +273,10 @@
         <Reference Include="Microsoft.SharePoint.Client.WorkflowServices, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
           <SpecificVersion>False</SpecificVersion>
           <HintPath>..\..\Assemblies\15\Microsoft.SharePoint.Client.WorkflowServices.dll</HintPath>
+        </Reference>
+        <Reference Include="Microsoft.ProjectServer.Client, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+          <SpecificVersion>False</SpecificVersion>
+          <HintPath>..\..\Assemblies\15\Microsoft.ProjectServer.Client.dll</HintPath>
         </Reference>
       </ItemGroup>
     </Otherwise>

@@ -11,6 +11,7 @@ using OfficeDevPnP.Core.Utilities;
 using System.Configuration;
 using System.Threading.Tasks;
 using System.Net.Http;
+using MPSC=Microsoft.ProjectServer.Client;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens;
 using OfficeDevPnP.Core.Utilities.Async;
@@ -60,6 +61,16 @@ namespace Microsoft.SharePoint.Client
             }
 
             return clientContext.Clone(new Uri(siteUrl));
+        }
+
+        public static MPSC.ProjectContext CloneAsProjectContext(this ClientRuntimeContext clientContext, string siteUrl)
+        {
+            if (string.IsNullOrWhiteSpace(siteUrl))
+            {
+                throw new ArgumentException(CoreResources.ClientContextExtensions_Clone_Url_of_the_site_is_required_, nameof(siteUrl));
+            }
+
+            return clientContext.CloneAsProjectContext(new Uri(siteUrl));
         }
 
 #if !ONPREMISES
@@ -245,6 +256,26 @@ namespace Microsoft.SharePoint.Client
             }
 
             ClientContext clonedClientContext = new ClientContext(siteUrl);
+            CloneInternal(clientContext, clonedClientContext);
+
+            return clonedClientContext;
+        }
+
+        public static MPSC.ProjectContext CloneAsProjectContext(this ClientRuntimeContext clientContext, Uri siteUrl)
+        {
+            if (siteUrl == null)
+            {
+                throw new ArgumentException(CoreResources.ClientContextExtensions_Clone_Url_of_the_site_is_required_, nameof(siteUrl));
+            }
+
+            MPSC.ProjectContext clonedClientContext = new MPSC.ProjectContext(siteUrl.AbsoluteUri);
+            CloneInternal(clientContext, clonedClientContext);
+
+            return clonedClientContext;
+        }
+
+        private static void CloneInternal(ClientRuntimeContext clientContext, ClientContext clonedClientContext)
+        {
             clonedClientContext.AuthenticationMode = clientContext.AuthenticationMode;
             clonedClientContext.ClientTag = clientContext.ClientTag;
 #if !ONPREMISES
@@ -274,10 +305,9 @@ namespace Microsoft.SharePoint.Client
                     methodInfo.Invoke(clientContext, parametersArray);
                 };
             }
-
-            return clonedClientContext;
         }
 
+        
         /// <summary>
         /// Gets a site collection context for the passed web. This site collection client context uses the same credentials
         /// as the passed client context
